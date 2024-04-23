@@ -3,7 +3,7 @@ import { ObjectType, Field, Int} from "@nestjs/graphql";
 @ObjectType()
 export class Teacher{
   @Field((type) => Int)
-  id: Number;
+  id: number;
 
   @Field()
   name: string;
@@ -13,5 +13,4 @@ export class Teacher{
 
   @Field({nullable: true})
   display_name?: string;
-
 }
