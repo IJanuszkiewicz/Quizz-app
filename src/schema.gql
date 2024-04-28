@@ -10,5 +10,5 @@ type Student {
 }
 
 type Query {
-  getStudent: Student!
+  getStudent: [Student!]!
 }
