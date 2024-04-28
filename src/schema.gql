@@ -10,5 +10,9 @@ type Student {
 }
 
 type Query {
-  getStudent: [Student!]!
+  getStudents: [Student!]!
+}
+
+type Mutation {
+  newStudent(name: String!, surname: String!, displayName: String): Student!
 }
