@@ -8,7 +8,7 @@ import { StudentService } from "./studentService";
     imports: [TypeOrmModule.forFeature([Student])],
     providers: [
         StudentResolver,
-        StudentService
+        StudentService,
     ]
 })
 export class StudentModule {}

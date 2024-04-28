@@ -5,6 +5,7 @@ import { StudentResolver } from './students/studentResolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Student } from './graphql/models/student';
 import { StudentModule } from './students/students.module';
+import { StudentService } from './students/studentService';
 
 @Module({
   imports: [
@@ -15,9 +16,9 @@ import { StudentModule } from './students/students.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 9000,
+      port: 5432,
       username: 'postgres',
-      password: 'mysecredpassword',
+      password: 'admin',
       database: 'postgres',
       entities: [Student],
       synchronize: true,
@@ -25,6 +26,6 @@ import { StudentModule } from './students/students.module';
     StudentModule
   ],
   controllers: [],
-  providers: [StudentResolver],
+  providers: [],
 })
 export class AppModule {}

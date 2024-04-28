@@ -9,11 +9,16 @@ export class StudentService{
         @InjectRepository(Student) private studentRepository: Repository<Student>
     ) {}
 
-    addStudent(){
-        return this.studentRepository.create({
-            name: "john",
-            surname: "doe",
-            display_name: "jd"
+    addStudent(student: Student){
+        const user = this.studentRepository.create({
+            name: student.name,
+            surname: student.surname,
+            display_name: student.display_name
         })
+        return this.studentRepository.save(user)
+    }
+
+    getAllStudents(){
+        return this.studentRepository.find()
     }
 }
