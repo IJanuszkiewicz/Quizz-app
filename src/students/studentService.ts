@@ -10,12 +10,7 @@ export class StudentService{
     ) {}
 
     addStudent(student: Student){
-        const user = this.studentRepository.create({
-            name: student.name,
-            surname: student.surname,
-            display_name: student.display_name
-        })
-        return this.studentRepository.save(user)
+        return this.studentRepository.save(student)
     }
 
     getAllStudents(){

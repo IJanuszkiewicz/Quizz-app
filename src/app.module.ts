@@ -5,11 +5,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentModule } from './students/students.module';
 import { Student } from './graphql/models/student';
+import { Teacher } from './graphql/models/teacher';
+import { TestSet } from './graphql/models/testSet';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.example.env', 
+      envFilePath: '.env', 
       isGlobal: true, 
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -23,7 +25,7 @@ import { Student } from './graphql/models/student';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Student],
+      entities: [Student, Teacher, TestSet],
       synchronize: true,
     }),
     StudentModule,
