@@ -7,6 +7,9 @@ import { StudentModule } from './students/students.module';
 import { Student } from './graphql/models/student';
 import { Teacher } from './graphql/models/teacher';
 import { TestSet } from './graphql/models/testSet';
+import { Question } from './graphql/models/question';
+import { AnswerProposition } from './graphql/models/answerPorpositions';
+import { CorrectAnswer } from './graphql/models/correctAnswers';
 
 @Module({
   imports: [
@@ -25,7 +28,7 @@ import { TestSet } from './graphql/models/testSet';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Student, Teacher, TestSet],
+      entities: [Student, Teacher, TestSet, Question, AnswerProposition, CorrectAnswer],
       synchronize: true,
     }),
     StudentModule,
