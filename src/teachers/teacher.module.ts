@@ -9,6 +9,10 @@ import { TeacherResolver } from "./teacher.resolver";
     providers: [
         TeacherService,
         TeacherResolver,
+    ],
+    exports: [
+        TeacherService
     ]
+
 })
 export class TeacherModule {}

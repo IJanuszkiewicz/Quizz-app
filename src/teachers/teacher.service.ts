@@ -17,4 +17,10 @@ export class TeacherService{
         return this.teacherRepository.find()
     }
 
+    getTeacherById(id: number){
+        return this.teacherRepository.findOneByOrFail({
+            id: id
+        })
+    }
+
 }

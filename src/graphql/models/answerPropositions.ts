@@ -12,7 +12,7 @@ export class AnswerProposition{
 
     @Column()
     @Field()
-    letter: string;
+    character: string;
 
     @Column()
     @Field()

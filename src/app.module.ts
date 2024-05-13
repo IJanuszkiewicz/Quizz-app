@@ -11,6 +11,7 @@ import { Question } from './graphql/models/question';
 import { AnswerProposition } from './graphql/models/answerPropositions';
 import { CorrectAnswer } from './graphql/models/correctAnswers';
 import { TeacherModule } from './teachers/teacher.module';
+import { TestSetModule } from './testSet/testSet.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { TeacherModule } from './teachers/teacher.module';
     }),
     StudentModule,
     TeacherModule,
+    TestSetModule
   ],
   controllers: [],
   providers: [],
