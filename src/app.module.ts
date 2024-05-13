@@ -8,7 +8,7 @@ import { Student } from './graphql/models/student';
 import { Teacher } from './graphql/models/teacher';
 import { TestSet } from './graphql/models/testSet';
 import { Question } from './graphql/models/question';
-import { AnswerProposition } from './graphql/models/answerPorpositions';
+import { AnswerProposition } from './graphql/models/answerPropositions';
 import { CorrectAnswer } from './graphql/models/correctAnswers';
 import { TeacherModule } from './teachers/teacher.module';
 

@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Teacher } from "src/graphql/models/teacher";
-import { TeacherService } from "./teacherService";
+import { TeacherService } from "./teacher.service";
 
 @Resolver()
 export class TeacherResolver{

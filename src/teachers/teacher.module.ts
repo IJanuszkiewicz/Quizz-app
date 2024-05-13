@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Teacher } from "src/graphql/models/teacher";
-import { TeacherService } from "./teacherService";
-import { TeacherResolver } from "./teacherResolver";
+import { TeacherService } from "./teacher.service";
+import { TeacherResolver } from "./teacher.resolver";
 
 @Module({
     imports: [TypeOrmModule.forFeature([Teacher])],

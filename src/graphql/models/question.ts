@@ -2,7 +2,7 @@ import { ObjectType, Field, Int, registerEnumType} from "@nestjs/graphql";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TestSet } from "./testSet";
 import { CorrectAnswer } from "./correctAnswers";
-import { AnswerProposition } from "./answerPorpositions";
+import { AnswerProposition } from "./answerPropositions";
 
 export enum QuestionType {
     SINGLE_CHOICE,
