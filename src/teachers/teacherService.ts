@@ -9,5 +9,12 @@ export class TeacherService{
         @InjectRepository(Teacher) private teacherRepository: Repository<Teacher>
     ) {}
 
+    addTeacher(teacher: Teacher): Promise<Teacher> {
+        return this.teacherRepository.save(teacher)
+    }
+
+    getAllTeachers(): Promise<Teacher[]> {
+        return this.teacherRepository.find()
+    }
 
 }

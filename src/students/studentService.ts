@@ -9,11 +9,11 @@ export class StudentService{
         @InjectRepository(Student) private studentRepository: Repository<Student>
     ) {}
 
-    addStudent(student: Student){
+    addStudent(student: Student): Promise<Student> {
         return this.studentRepository.save(student)
     }
 
-    getAllStudents(){
+    getAllStudents(): Promise<Student[]> {
         return this.studentRepository.find()
     }
 }

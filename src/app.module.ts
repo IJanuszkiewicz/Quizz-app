@@ -10,6 +10,7 @@ import { TestSet } from './graphql/models/testSet';
 import { Question } from './graphql/models/question';
 import { AnswerProposition } from './graphql/models/answerPorpositions';
 import { CorrectAnswer } from './graphql/models/correctAnswers';
+import { TeacherModule } from './teachers/teacher.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { CorrectAnswer } from './graphql/models/correctAnswers';
       synchronize: true,
     }),
     StudentModule,
+    TeacherModule,
   ],
   controllers: [],
   providers: [],
