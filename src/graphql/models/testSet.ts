@@ -17,6 +17,7 @@ export class TestSet{
     @ManyToOne(() => Teacher, (teacher) => teacher.test_sets)
     teacher: Teacher;
 
-    @OneToMany(() => Question, (question) => question.test_set)
+    @Field(type => [Question])
+    @OneToMany(() => Question, (question) => question.test_set, {cascade: true})
     questions: Question[]
 }

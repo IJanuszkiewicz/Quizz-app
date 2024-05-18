@@ -36,7 +36,8 @@ export class Question{
     @ManyToOne(() => TestSet, (testSet) => testSet.questions)
     test_set: TestSet
 
-    @OneToMany(() => CorrectAnswer, (correctAnswer) => correctAnswer.question)
+    @Field(type => [CorrectAnswer])
+    @OneToMany(() => CorrectAnswer, (correctAnswer) => correctAnswer.question, {cascade: true})
     correct_answers: CorrectAnswer[]
 
     @OneToMany(() => AnswerProposition, (answerProposition) => answerProposition.question)

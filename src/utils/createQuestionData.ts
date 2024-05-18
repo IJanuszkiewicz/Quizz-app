@@ -11,8 +11,8 @@ export class CreateQuestionData{
     type: QuestionType
 
     @Field(type => [String])
-    correct_answers: [String]
+    correct_answers: [string]
 
-    @Field(type => [String])
-    answer_propositions: [String]
+    @Field(type => [String], {nullable: true})
+    wrong_answers: [string]
 }
