@@ -35,6 +35,10 @@ export class QuestionService{
             question_text: createQuestionData.question_text,
             type: createQuestionData.type,
         })
+
+        if(question.type == QuestionType.SINGLE_CHOICE && createQuestionData.correct_answers.length != 1){
+            throw new BadRequestException("Question of type single choice hasn't got 1 correct answer")
+        }
         question.test_set = testSet
 
         const letters = randomLetters(createQuestionData.correct_answers.length + createQuestionData.wrong_answers.length)
