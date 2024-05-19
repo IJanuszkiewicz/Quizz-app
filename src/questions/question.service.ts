@@ -19,8 +19,8 @@ export class QuestionService{
 
     private Types2Functions: {[key in QuestionType]: (questionData: CreateQuestionData, testSet: TestSet) => Question} = {
         [QuestionType.PLAIN_TEXT]: (questionData: CreateQuestionData, testSet: TestSet) => this.createPlainTextQuestion(questionData, testSet),
-        [QuestionType.MULTIPLE_CHOICE]: (questionData: CreateQuestionData, testSet: TestSet) => {throw new NotImplementedException()},
-        [QuestionType.SINGLE_CHOICE]: (questionData: CreateQuestionData, testSet: TestSet) => {throw new NotImplementedException()},
+        [QuestionType.MULTIPLE_CHOICE]: (questionData: CreateQuestionData, testSet: TestSet) => this.createChoiceQuestion(questionData, testSet),
+        [QuestionType.SINGLE_CHOICE]: (questionData: CreateQuestionData, testSet: TestSet) => this.createChoiceQuestion(questionData, testSet),
         [QuestionType.SORTING]: (questionData: CreateQuestionData, testSet: TestSet) => this.createSortingQuestion(questionData, testSet),
 
     }
@@ -29,6 +29,44 @@ export class QuestionService{
         const question: Question = this.Types2Functions[createQuestionData.type](createQuestionData, testSet);
         return question
     }
+    
+    createChoiceQuestion(createQuestionData: CreateQuestionData, testSet: TestSet): Question{
+        const question = this.questionRepository.create({
+            question_text: createQuestionData.question_text,
+            type: createQuestionData.type,
+        })
+        question.test_set = testSet
+
+        const letters = randomLetters(createQuestionData.correct_answers.length + createQuestionData.wrong_answers.length)
+        let correctAnsStr: string = ""
+        const propositions: AnswerProposition[] = []
+        for(let i: number = 0; i < createQuestionData.correct_answers.length; i++){
+            const proposition: AnswerProposition = this.answerPropositionRepository.create({
+                character: letters[i],
+                proposition: createQuestionData.correct_answers[i]
+            })
+            proposition.question = question
+            propositions.push(proposition)
+            correctAnsStr += letters[i]
+        }
+        for(let i: number = 0; i < createQuestionData.wrong_answers.length; i++){
+            const proposition: AnswerProposition = this.answerPropositionRepository.create({
+                character: letters[i + createQuestionData.correct_answers.length],
+                proposition: createQuestionData.wrong_answers[i]
+            })
+            proposition.question = question
+            propositions.push(proposition)
+        }
+        question.answer_propositions = propositions.sort((prop1, prop2) => 
+            prop1.character.charCodeAt(0) - prop2.character.charCodeAt(0)
+        )
+        const correctAns: CorrectAnswer = this.correctAnswerRepository.create({
+            answer: correctAnsStr
+        })
+        correctAns.question = question
+        question.correct_answers = [correctAns]
+        return question
+    } 
 
     createSortingQuestion(createQuestionData: CreateQuestionData, testSet: TestSet): Question{
         const question = this.questionRepository.create({
@@ -39,7 +77,7 @@ export class QuestionService{
 
         if (createQuestionData.correct_answers.length < 2 ||
             createQuestionData.correct_answers.length > QuestionService.MaxAnswers){
-            throw new BadRequestException(`Number of answers is too big (maximum number of answers: ${QuestionService.MaxAnswers})`)
+            throw new BadRequestException(`Number of answers is wrong (minimum number of answers: 2, maximum number of answers: ${QuestionService.MaxAnswers})`)
         }
 
         const propositions: AnswerProposition[] = []
@@ -55,7 +93,7 @@ export class QuestionService{
         question.answer_propositions = propositions.sort((proposition1, proposition2) => 
             proposition1.character.charCodeAt(0) - proposition2.character.charCodeAt(0))
 
-        
+
         const correctAnsStr: string = letters.reduce(
             (accumulator, currentValue) => accumulator + currentValue,
             "",
