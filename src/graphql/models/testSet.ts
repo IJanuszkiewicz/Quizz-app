@@ -14,6 +14,7 @@ export class TestSet{
     @Field()
     name: string;
 
+    @Field(type => Teacher)
     @ManyToOne(() => Teacher, (teacher) => teacher.test_sets)
     teacher: Teacher;
 

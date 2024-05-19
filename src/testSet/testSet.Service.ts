@@ -26,6 +26,37 @@ export class TestSetService{
             }
         });
     }
+
+    getQuestionsForTest(testSetId: number){
+        return this.testSetRepository.find({
+            select:{
+                name: true,
+                teacher: {
+                    name: true,
+                    surname: true,
+                    display_name: true
+                },
+                questions:{
+                    question_text: true,
+                    answer_propositions:{
+                        character: true,
+                        proposition: true
+                    },
+                    type: true
+                    
+                }
+            },
+            where:{
+                id: testSetId
+            },
+            relations: {
+                teacher: true,
+                questions: {
+                    answer_propositions: true
+                }
+            }
+        })
+    }
     
     async newTestSet(createTestSetData: CreateTestSetData){
         const set = this.testSetRepository.create(createTestSetData);

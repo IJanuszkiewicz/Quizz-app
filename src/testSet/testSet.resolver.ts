@@ -14,6 +14,11 @@ export class TestSetResolver{
         return this.testSetService.getTestSets()
     }
 
+    @Query(returns => [TestSet])
+    getTestSetQuestions(@Args('testId') testId: number){
+        return this.testSetService.getQuestionsForTest(testId)
+    }
+
     @Mutation(returns => TestSet)
     newTestSet(@Args('newTestSetData') createTestSetData: CreateTestSetData){
         return this.testSetService.newTestSet(createTestSetData)
