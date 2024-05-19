@@ -128,5 +128,23 @@ export class QuestionService{
         return question
     }
 
+    async checkAnswer(questionId: number, answer: string): Promise<boolean> {
+        const question = await this.questionRepository.findOne({
+            where: {
+                id: questionId
+            },
+            relations:{
+                correct_answers: true
+            }
+        })
+        for(let i = 0; i < question.correct_answers.length; i++){
+            if(question.correct_answers[i].answer.toLowerCase().trim() === answer.toLowerCase().trim()){
+                return true
+            }
+        }
+        return false
+
+    }
+
 }
 

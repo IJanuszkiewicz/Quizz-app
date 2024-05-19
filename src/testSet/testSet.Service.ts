@@ -1,6 +1,8 @@
-import { Injectable, Module } from "@nestjs/common";
+import { BadRequestException, Injectable, Module } from "@nestjs/common";
 import{ InjectRepository } from '@nestjs/typeorm'
+import { AnswersToSubmit } from "src/graphql/models/answersToSubmit";
 import { Question } from "src/graphql/models/question";
+import { Result } from "src/graphql/models/result";
 import { TestSet } from "src/graphql/models/testSet";
 import { QuestionService } from "src/questions/question.service";
 import { TeacherService } from "src/teachers/teacher.service";
@@ -27,6 +29,20 @@ export class TestSetService{
         });
     }
 
+    async getResult(answers: AnswersToSubmit){
+        if(answers.answers.length != answers.question_ids.length){
+            throw new BadRequestException("Number of questions doesn't match number of answers")
+        }
+        const max = answers.question_ids.length
+        let obtained = 0
+        for(let i = 0; i < answers.answers.length; i++){
+            if( await this.questionService.checkAnswer(answers.question_ids[i], answers.answers[i])){
+                obtained += 1
+            }
+        }
+        return new Result(max, obtained)
+    }
+
     getQuestionsForTest(testSetId: number){
         return this.testSetRepository.find({
             select:{
@@ -42,7 +58,8 @@ export class TestSetService{
                         character: true,
                         proposition: true
                     },
-                    type: true
+                    type: true,
+                    id: true
                     
                 }
             },
