@@ -9,8 +9,9 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_DB=${DB_NAME}
     container_name: postgres
-    ports:
-      - '${DB_PORT}:5432'
+    expose:
+      - ${DB_PORT}
+    command: -p ${DB_PORT}
 
   app: 
     build:
