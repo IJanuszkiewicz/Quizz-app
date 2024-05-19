@@ -20,9 +20,11 @@ export class TestSetService{
         return this.testSetRepository.find({
             relations:{
                 questions: {
-                    correct_answers: true
+                    correct_answers: true,
+                    answer_propositions: true
                 }
-        }});
+            }
+        });
     }
     
     async newTestSet(createTestSetData: CreateTestSetData){

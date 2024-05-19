@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int, registerEnumType} from "@nestjs/graphql";
+import { ObjectType, Field, Int, registerEnumType, FIELD_RESOLVER_MIDDLEWARE_METADATA} from "@nestjs/graphql";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TestSet } from "./testSet";
 import { CorrectAnswer } from "./correctAnswers";
@@ -40,6 +40,7 @@ export class Question{
     @OneToMany(() => CorrectAnswer, (correctAnswer) => correctAnswer.question, {cascade: true})
     correct_answers: CorrectAnswer[]
 
-    @OneToMany(() => AnswerProposition, (answerProposition) => answerProposition.question)
+    @Field(type => [AnswerProposition])
+    @OneToMany(() => AnswerProposition, (answerProposition) => answerProposition.question, {cascade: true})
     answer_propositions: AnswerProposition[]
 }
