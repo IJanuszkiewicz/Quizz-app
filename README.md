@@ -37,5 +37,3 @@ docker-compose up --build
 ```
 
 The backend services should now be running, and you can interact with the GraphQL API at http://localhost:[specified_port]/graphql.
-## Documentation
-For more detailed information about the API endpoints and data models, refer to the docs directory.
