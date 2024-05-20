@@ -26,8 +26,8 @@ To get the backend up and running, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-directory>
+   git clone https://github.com/IJanuszkiewicz/Quizz-app
+   cd Quizz-app
    ```
 
 2. Create a .env file at the root of the project and populate it with the necessary environment variables. You can see what variables you need in _.example.env_ file
