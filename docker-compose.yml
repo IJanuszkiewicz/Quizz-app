@@ -12,13 +12,19 @@ services:
     expose:
       - ${DB_PORT}
     command: -p ${DB_PORT}
+    env_file:
+      - ./.example.env
+      - ./.env
 
-  app: 
+  app:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: quizz-app
     ports:
-      - '3000:3000'
-    depends_on: 
+      - '${APP_PORT}:3000'
+    depends_on:
       - db
+    env_file:
+      - ./.example.env
+      - ./.env
