@@ -1,8 +1,8 @@
-import { BadRequestException, Injectable, Module } from "@nestjs/common";
-import{ InjectRepository } from '@nestjs/typeorm'
+import { BadRequestException, Injectable } from "@nestjs/common";
+import { InjectRepository } from '@nestjs/typeorm'
 import { AnswersToSubmit } from "src/graphql/models/answersToSubmit";
-import { Question } from "src/graphql/models/question";
 import { Result } from "src/graphql/models/result";
+import { Question } from "src/graphql/models/question";
 import { TestSet } from "src/graphql/models/testSet";
 import { QuestionService } from "src/questions/question.service";
 import { TeacherService } from "src/teachers/teacher.service";
