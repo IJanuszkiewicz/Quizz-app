@@ -10,5 +10,5 @@ export class CreateTestSetData{
     name: string
 
     @Field((type) => [CreateQuestionData])
-    questions_data: [CreateQuestionData]
+    questions_data: CreateQuestionData[]
 }
