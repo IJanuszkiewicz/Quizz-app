@@ -123,6 +123,7 @@ export class QuestionService{
             correct_answer.question = question
             return correct_answer
         })
+        question.answer_propositions = []
         question.correct_answers = answers
         question.test_set = testSet
         return question

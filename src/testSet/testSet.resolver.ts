@@ -1,4 +1,4 @@
-import { Mutation, Resolver, Args, Query } from "@nestjs/graphql";
+import { Mutation, Resolver, Args, Query, Int } from "@nestjs/graphql";
 import { TestSetService } from "./testSet.service";
 import { CreateTestSetData } from "src/utils/createTestSetData";
 import { TestSet } from "src/graphql/models/testSet";
@@ -16,14 +16,14 @@ export class TestSetResolver{
         return this.testSetService.getTestSets()
     }
 
-    @Query(returns => [TestSet])
-    getTestSetQuestions(@Args('testId') testId: number){
+    @Query(returns => TestSet)
+    getTestSetQuestions(@Args('testId', {type: () => Int}) testId: number){
         return this.testSetService.getQuestionsForTest(testId)
     }
 
     @Mutation(returns => TestSet)
-    newTestSet(@Args('newTestSetData') createTestSetData: CreateTestSetData){
-        return this.testSetService.newTestSet(createTestSetData)
+    async newTestSet(@Args('newTestSetData') createTestSetData: CreateTestSetData){
+        return await this.testSetService.newTestSet(createTestSetData)
     }
 
     @Query(returns => Result)

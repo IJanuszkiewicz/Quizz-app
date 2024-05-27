@@ -43,8 +43,8 @@ export class TestSetService{
         return new Result(max, obtained)
     }
 
-    getQuestionsForTest(testSetId: number){
-        return this.testSetRepository.find({
+    async getQuestionsForTest(testSetId: number){
+        return (await this.testSetRepository.find({
             select:{
                 name: true,
                 teacher: {
@@ -72,7 +72,8 @@ export class TestSetService{
                     answer_propositions: true
                 }
             }
-        })
+        }))[0]
+        
     }
     
     async newTestSet(createTestSetData: CreateTestSetData){
