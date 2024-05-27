@@ -7,7 +7,7 @@ This project serves as the backend for a quiz application, designed to manage an
 - **Teacher Management**: Add and manage teacher accounts.
 - **Student Management**: Add and manage student accounts.
 - **Testset Management**: Create and manage collections of test questions.
-- **Question Fetching**: Retrieve questions for tests based on specific criteria.
+- **Question Fetching**: Retrieve questions for specified test
 - **Answer Checking**: Evaluate submitted answers and provide feedback.
 
 ## Technology Stack
@@ -18,7 +18,6 @@ This project serves as the backend for a quiz application, designed to manage an
 
 ## Prerequisites
 Before running the project, ensure you have the following installed:
-- **Node.js**: Download Node.js
 - **Docker**: Download Docker
 
 ## Quick Start
@@ -37,3 +36,4 @@ docker-compose up --build
 ```
 
 The backend services should now be running, and you can interact with the GraphQL API at http://localhost:[specified_port]/graphql.
+You can see example queries and mutations in the [EXAMPLES.md](EXAMPLES.md) file.
