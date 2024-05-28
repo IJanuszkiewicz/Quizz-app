@@ -13,7 +13,6 @@ services:
       - ${DB_PORT}
     command: -p ${DB_PORT}
     env_file:
-      - ./.example.env
       - ./.env
 
   app:
@@ -26,5 +25,4 @@ services:
     depends_on:
       - db
     env_file:
-      - ./.example.env
       - ./.env
