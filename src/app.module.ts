@@ -16,7 +16,7 @@ import { TestSetModule } from './testSet/testSet.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: ['.env', '.example.env'], 
+      envFilePath: ['.env'], 
       isGlobal: true, 
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
